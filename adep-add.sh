@@ -11,14 +11,20 @@ if [[ $1 == "-h" ]]; then
   echo "HELP <adep-add>"
   echo 
   echo "SYNTAX"
-  echo "  adep-add [OPTION] PROJECT_DIR DEPLOY_DIR [FLAGS]"
+  echo "  adep-add [OPTION] PROJECT_DIR DEPLOY_DIR LABEL [FLAGS]"
   echo "    PROJECT_DIR   - Directory of the Astro project"
   echo "    DEPLOY_DIR    - Directory where the static files will be deployed"
+  echo "    LABEL         - Name to use when deploying a single project"
   echo
   echo "AVAILABLE OPTIONS"
   echo "  Option  Action"
   echo "  -h      Show this help"
   exit 0
+fi
+
+if [[ "$1" == -* ]]; then
+  echo "$1 option not recognized"
+  exit 1
 fi
 
 PROJECT_DIR=$1
@@ -64,8 +70,6 @@ while read -r line; do
   if [[ -z "$line" ]]; then
     continue
   fi
-  # string="apple,banana,orange"
-# IFS=',' read -ra arr <<< "$string"
   IFS=';' read -ra val <<< "$line"
   records["${val[0]}"]="${val[1]};{$val[2]}"
   if [[ "${val[0]}" == "$LABEL" ]]; then
