@@ -11,7 +11,21 @@ CD solution.
 
 And because I wanted to do something with bash
 
-## Setup
+## Install
+
+Just execute the installer.sh script, to do it automatically
+just run
+
+```
+sudo wget https://raw.githubusercontent.com/gerardo-m/astro_deployer/refs/heads/master/installer.sh
+sudo chmod +x installer.sh
+./installer.sh
+```
+
+The installer script is just copying the other scripts into /opt,
+making them executable and adding the directory to the PATH
+
+You can do this manually:
 
 - Copy the adep.sh and adep-add.sh file into /opt/adep/
 - Make them executable with
@@ -53,7 +67,7 @@ And all your projects will be pulled and deployed.
 
 ## Data file Overview
 
-The file data is located at ~/.adep/data
+The data file is located at ~/.adep/data
 
 The file contains a row for every project with the following
 fields separated by a semicolon:
