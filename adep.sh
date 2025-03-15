@@ -34,7 +34,6 @@ while read -u 3 -r line; do
   DEPLOY_DIR=$(echo "${val[2]}" | sed 's:/*$::')
 
   SHOULD_CONTINUE=1
-  echo "$#"
   if [[ $# -gt 0 ]]; then
     for i in $@; do
       if [[ $i == $LABEL ]]; then
@@ -45,8 +44,6 @@ while read -u 3 -r line; do
   else
     SHOULD_CONTINUE=0
   fi
-
-  echo "$SHOULD_CONTINUE"
 
   if [[ $SHOULD_CONTINUE -eq 1 ]]; then
     continue

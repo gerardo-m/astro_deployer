@@ -71,7 +71,7 @@ while read -r line; do
     continue
   fi
   IFS=';' read -ra val <<< "$line"
-  records["${val[0]}"]="${val[1]};{$val[2]}"
+  records["${val[0]}"]="${val[1]};${val[2]}"
   if [[ "${val[0]}" == "$LABEL" ]]; then
     EXISTING_LABEL="${val[0]}"
     continue
@@ -84,10 +84,20 @@ done < ~/.adep/data
 if [[ "$EXISTING_LABEL" != "" || "$EXISTING_DIR" != "" ]]; then
   printf "Existing records where found, replace them? (Y/N): "
   read REPLACE_EXISTING
+  if [[ "$REPLACE_EXISTING" != "Y" ]]; then
+    echo "No changes were made. EXITING..."
+    exit 0
+  fi
   # Replace the existing records and rewrite the whole file
+  echo "Replacing records"
   unset records["$EXISTING_DIR"]
   records["$EXISTING_LABEL"]="$PROJECT_DIR;$DEPLOY_DIR"
-  # Rewrite file TODO
+  # Rewrite file
+  printf '%s' '' > ~/.adep/data
+  for k in "${!records[@]}"; do
+    printf '%s;%s\n' "$k" "${records[$k]}" >> ~/.adep/data
+  done
+  echo "Records successfully updated"
   exit 0
 fi
 

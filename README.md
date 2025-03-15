@@ -41,6 +41,8 @@ export PATH="$PATH:/opt/adep"
 
 ## Execution
 
+### Adding projects
+
 Run the following to know how to add projects to the data file
 ```
 adep-add.sh -h
@@ -51,19 +53,26 @@ Basically you have to run this for all your projects
 adep-add.sh /path/to/project /path/to/destination label
 ```
 
-Then you just run 
+### Deploying
+
+To deploy all your projects just run
 ```
 adep.sh
 ```
 
-And all your projects will be pulled and deployed.
+If you want to deploy a single project run
+```
+adep.sh <project-label>
+```
+
+With the label of the project you want to deploy
 
 ## TODO
 
 - Add a couple of things to the data file: git repo, flags
 - Check if the repo exist before running the script
-- Replace existing projects when duplicates are sent
 - Option to remove projects
+- Basically a lot of edge cases and handle things that could go wrong
 
 ## Data file Overview
 
